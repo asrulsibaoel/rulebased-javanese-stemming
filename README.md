@@ -1,5 +1,5 @@
 # Rule Based Stemming   
-Rule Based Stemming for Javanese Language.  
+For Javanese Language.  
 ---  
 Our team consist of:  
 1. Asrul Sani Ariesandy  
