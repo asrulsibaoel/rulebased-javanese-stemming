@@ -1,0 +1,8 @@
+development:
+    exclude:
+        - loggly
+infomedia:
+    exclude:
+        - loggly
+        - aop
+        - aop-logger

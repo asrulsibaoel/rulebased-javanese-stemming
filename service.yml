@@ -1,0 +1,14 @@
+schema: kata.ai/schema/merapi/1.0
+name: Information Retrieval
+version: '${package.version}'
+plugins:
+    - merapi-plugin-express
+    - merapi-plugin-service
+components:
+    main: Main
+service:
+    port: 5000
+app:
+    host: 0.0.0.0
+    port: 8000
+main: main

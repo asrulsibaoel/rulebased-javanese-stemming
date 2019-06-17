@@ -1,0 +1,40 @@
+{
+    "name": "information-retrieval",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://example.com/"
+    },
+    "nyc": {
+        "include": [
+            "components/**/*.ts",
+            "components/*.ts",
+            "interfaces/*.ts"
+        ],
+        "exclude": [
+            "node_modules"
+        ],
+        "extension": [
+            ".ts"
+        ],
+        "require": [
+            "ts-node/register"
+        ],
+        "reporter": [
+            "json",
+            "html"
+        ],
+        "all": true
+    },
+    "license": "ISC",
+    "dependencies": {
+        "@types/node": "^7.0.28",
+        "js-yaml": "^3.9.1",
+        "lodash": "^4.17.4",
+        "merapi": "^0.17.1",
+        "merapi-plugin-express": "^0.6.1",
+        "merapi-plugin-service": "^0.3.7"
+    }
+}
