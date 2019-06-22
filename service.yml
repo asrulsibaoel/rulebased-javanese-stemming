@@ -2,8 +2,8 @@ schema: kata.ai/schema/merapi/1.0
 name: Information Retrieval
 version: '${package.version}'
 plugins:
-    - merapi-plugin-express
-    - merapi-plugin-service
+    - express
+    - service
 components:
     main: Main
 service:
