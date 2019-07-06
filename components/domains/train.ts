@@ -9,7 +9,7 @@ export default class Train extends Component {
         return true;
     }
 
-    public async checkAvailability(): Promise<boolean> {
+    public async checkAvailability(word: string): Promise<boolean> {
         return false;
     }
 }
