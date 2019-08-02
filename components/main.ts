@@ -5,11 +5,12 @@ export default class Main extends Component {
     constructor(
         private config: IConfigReader,
         private injector: IInjector,
+        private logger: ILogger,
         ) {
         super();
     }
 
     public async start(argv: string[]) {
-        // const commands = this.config.get<ICommandList>("commands");
+        this.logger.info("Starting Javanese Stemmer...");
     }
 }

@@ -2,13 +2,37 @@ schema: kata.ai/schema/merapi/1.0
 name: Information Retrieval
 version: '${package.version}'
 plugins:
-    - merapi-plugin-express
-    - merapi-plugin-service
+    - express
+    - service
 components:
+    predict: domains/Predict
+    removePrefix: domains/RemovePrefix
+    removeSuffix: domains/RemoveSuffix
+    spellChecker: domains/SpellChecker
+    confixRepo: repos/ConfixRepo
+    corpusRepo: repos/CorpusRepo
+    databaseRepo: repos/DatabaseRepo
+    prefixRepo: repos/PrefixRepo
+    suffixRepo: repos/SuffixRepo
     main: Main
 service:
     port: 5000
-app:
-    host: 0.0.0.0
-    port: 8000
+    api.v1:
+        predictRootWord: predict.predictRootWord
+
+database:
+    client: mysql
+    connection:
+        host: ${$MYSQL_HOST}
+        user: ${$MYSQL_USERNAME}
+        password: ${$MYSQL_PASSWORD}
+        port: ${$MYSQL_PORT}
+        db: ${$MYSQL_DATABASE}
+        database: ${$MYSQL_DATABASE}
+        encrypt: true
+    pool:
+        min: "2"
+        max: "10"
+    migrations:
+        tableName: ${$MYSQL_MIGRATION}
 main: main

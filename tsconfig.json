@@ -13,6 +13,7 @@
     },
 
     "include": [
+        "components/**/**/*.ts",
         "components/**/*.ts",
         "components/*.ts",
         "test/**/*.ts",
