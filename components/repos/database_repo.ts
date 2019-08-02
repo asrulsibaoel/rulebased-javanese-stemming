@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 
 export default class DatabaseRepo<T> extends Component implements IRepo<T> {
     protected knexClient: knex;
+    protected entityName: string;
 
     constructor(config: IConfigReader) {
         super();
@@ -16,41 +17,41 @@ export default class DatabaseRepo<T> extends Component implements IRepo<T> {
         // await this.knexClient.migrate.latest();
     }
 
-    public async create(entityName: string, object: T): Promise<Id<T>> {
+    public async create(object: T): Promise<Id<T>> {
         const item = object as any;
         if (!item.id) {
             item.id = uuid();
         }
 
-        await this.knexClient(entityName).insert(item);
+        await this.knexClient(this.entityName).insert(item);
         return item;
     }
 
-    public async get(entityName: string, id: string): Promise<Id<T>> {
-        return this.knexClient(entityName)
+    public async get( id: string): Promise<Id<T>> {
+        return this.knexClient(this.entityName)
             .where("id", id)
             .first();
     }
 
-    public async gets(entityName: string, query: Partial<T>): Promise<T[]> {
-        return this.knexClient(entityName).where(query);
+    public async gets( query?: Partial<T>): Promise<T[]> {
+        return this.knexClient(this.entityName).where(query);
     }
 
-    public async update(entityName: string, id: string, object: T): Promise<Id<T>> {
+    public async update( id: string, object: T): Promise<Id<T>> {
         const item = object as any;
         if (!item.id) {
             item.id = id;
         }
 
-        return await this.knexClient(entityName)
-            .where("id", "=", id)
+        return await this.knexClient(this.entityName)
+            .where("id", id)
             .update(object);
     }
 
-    public async remove(entityName: string, id: string): Promise<boolean> {
+    public async remove( id: string): Promise<boolean> {
         try {
-            await this.knexClient(entityName)
-                .where("id", "=", id)
+            await this.knexClient(this.entityName)
+                .where("id", id)
                 .del();
         } catch (error) {
             return false;
@@ -59,11 +60,10 @@ export default class DatabaseRepo<T> extends Component implements IRepo<T> {
     }
 
     public async removeByFilter(
-        entityName: string,
         query: Partial<T>,
     ): Promise<boolean> {
         try {
-            await this.knexClient(entityName)
+            await this.knexClient(this.entityName)
                 .where(query)
                 .del();
         } catch (error) {
@@ -73,7 +73,6 @@ export default class DatabaseRepo<T> extends Component implements IRepo<T> {
     }
 
     public async paginate(
-        entityName: string,
         query: Partial<T>,
         page: number,
         limit: number,
@@ -83,10 +82,10 @@ export default class DatabaseRepo<T> extends Component implements IRepo<T> {
         page = page && page >= 1 ? page : 1;
 
         const offset = (page - 1) * limit;
-        const total = await this.count(entityName, query);
+        const total = await this.count(query);
 
         const results = {
-            data: await this.knexClient(entityName)
+            data: await this.knexClient(this.entityName)
                 .where(query)
                 .offset(offset)
                 .limit(limit),
@@ -97,9 +96,9 @@ export default class DatabaseRepo<T> extends Component implements IRepo<T> {
         return results;
     }
 
-    public async count(entityName: string, query: object) {
+    public async count(query: object) {
         query = query || {};
-        const result = await this.knexClient(entityName)
+        const result = await this.knexClient(this.entityName)
             .where(query)
             .count("*");
         return result[0]["count(*)"];

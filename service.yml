@@ -5,9 +5,20 @@ plugins:
     - express
     - service
 components:
+    predict: domains/Predict
+    removePrefix: domains/RemovePrefix
+    removeSuffix: domains/RemoveSuffix
+    spellChecker: domains/SpellChecker
+    confixRepo: repos/ConfixRepo
+    corpusRepo: repos/CorpusRepo
+    databaseRepo: repos/DatabaseRepo
+    prefixRepo: repos/PrefixRepo
+    suffixRepo: repos/SuffixRepo
     main: Main
 service:
     port: 5000
+    api.v1:
+        predictRootWord: predict.predictRootWord
 
 database:
     client: mysql

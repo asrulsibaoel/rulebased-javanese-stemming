@@ -10,20 +10,16 @@ export interface IPaginated<T> {
 }
 
 export interface IRepo<T> {
-    get(entityName: string, id: string): Promise<Id<T>>;
-    gets(entityName: string, query: object): Promise<T[]>;
-    create(entityName: string, object: T): Promise<Id<T>>;
-    update(entityName: string, id: string, object: T): Promise<Id<T>>;
-    remove(entityName: string, id: string): Promise<boolean>;
-    removeByFilter(entityName: string, query: object): Promise<boolean>;
-    paginate(entityName: string, query: object, page: number, limit: number): Promise<IPaginated<T>>;
-    count(entityName: string, query: object): Promise<number>;
+    get(id: string): Promise<Id<T>>;
+    gets(query: object): Promise<T[]>;
+    create(object: T): Promise<Id<T>>;
+    update(id: string, object: T): Promise<Id<T>>;
+    remove(id: string): Promise<boolean>;
+    removeByFilter(query: object): Promise<boolean>;
+    paginate(query: object, page: number, limit: number): Promise<IPaginated<T>>;
+    count(query: object): Promise<number>;
 }
 
-export interface IRedis {
-    get(key: string): Promise<string>;
-    set(key: string, data: string | JsonObject): Promise<string>;
-    delete(key: string): Promise<string>;
-    expire(key: string, ttl?: number): Promise<string>;
+export interface ICorpusRepo {
+    
 }
-

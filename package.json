@@ -5,7 +5,7 @@
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "https://example.com/"
+        "url": "github.com/asrulsibaoel/information-retrieval"
     },
     "nyc": {
         "include": [
