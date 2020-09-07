@@ -33,7 +33,7 @@
         "@types/node": "^7.0.28",
         "js-yaml": "^3.9.1",
         "knex": "^0.12.9",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.19",
         "merapi": "^0.17.1",
         "merapi-plugin-express": "^0.6.1",
         "merapi-plugin-service": "^0.3.7",
